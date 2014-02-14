@@ -1,0 +1,23 @@
+#This file is automatically rewritten by ANT.  Hand-edits may be lost.
+#Mon, 27 Jan 2014 11:36:23 +0100
+name=MATLABTddPlugin
+version.major=0
+version.minor=0
+version.revision=1
+version.date=20140127
+autoPublish=true
+requires=ANTForPlugins, PerlForPlugins
+provider=University of Pisa
+provider.url=http\://someUrl/updates
+license=GNU Affero General Public License v.3
+license.url=http\://www.gnu.org/licenses/agpl.html
+copyright=(c) 2014 University of Pisa - Department of Information Engineering
+info.url=http\://someUrlForWiki/MATLABTddPlugin
+history.url=http\://someUrlForWiki/MATLABTddPlugin/ChangeHistory
+executable=execute3.pl
+interpreter.prefix=${PerlForPlugins.perl.exe}
+author=Filippo Lauria (filippo.lauria1@gmail.com)
+authorUid=lauria
+description=This is the MATLAB one-step grading script. It includes ANT-based execution and MATLAB Unit Test Framework processing of instructor-written tests.
+timeoutMultiplier=2
+timeoutInternalPadding=400

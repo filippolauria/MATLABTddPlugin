@@ -1,0 +1,134 @@
+{
+    name             = MATLABTddPlugin;
+    version.major    = 0;
+    version.minor    = 0;
+    version.revision = 1;
+    version.date     = 20140123;
+    autoPublish      = true;
+    requires         = ( ANTForPlugins, PerlForPlugins );
+    provider         = "University of Pisa";
+    provider.url     = "http://someUrl/updates";
+    license          = "GNU Affero General Public License v.3";
+    license.url      = "http://www.gnu.org/licenses/agpl.html";
+    copyright        = "(c) 2014 University of Pisa - Department of Information Engineering";
+    info.url         = "http://someUrlForWiki/MATLABTddPlugin";
+    history.url      = "http://someUrlForWiki/MATLABTddPlugin/ChangeHistory";
+    executable       = execute3.pl;
+    interpreter.prefix = "${PerlForPlugins.perl.exe}";
+    author     = "Filippo Lauria (filippo.lauria1@gmail.com)";
+    authorUid  = filippolauria;
+    languages  = ( { name = "MATLAB"; version = "R2013a or higher"; } );
+    description = "This is the MATLAB one-step grading script.
+    It includes ANT-based execution and MATLAB Unit Test Framework processing
+    of instructor-written tests.";
+    timeoutMultiplier = 2;
+    timeoutInternalPadding = 400;
+    assignmentOptions = (
+        {
+            property    = testCases;
+            type        = file;
+            fileTypes   = ( m );
+            name        = "MATLAB Unit Test Framework Reference Test Class";
+            description =
+  "m-file containing MATLAB Unit Test Framework tests to run against student
+  code to assess completeness of problem coverage.
+  It must contain a MATLAB Unit Test Framework test class definition.
+  If you make no selection, an empty set of instructor reference tests will
+  be used instead.";
+        },
+        {
+            property    = localFiles;
+            type        = fileOrDir;
+            name        = "Data Files for Student";
+            description =
+  "A file (or a directory of files) to place in the student's current working
+  directory when running his/her tests and when running reference tests.  The
+  file you select (or the entire contents of the directory you select) will be
+  copied into the current working directory during grading so that
+  instructor-written test cases can read and/or write to the file(s).
+  The default is to copy no files.";
+        }
+    );
+    optionCategories = (
+        "MATLAB Settings",
+        "Scoring Settings",
+        "Profiling Settings",
+        "Script Developer"
+    );
+    options = (
+        {
+            property    = generalIncludes;
+            type        = fileOrDir;
+            fileTypes   = ();
+            name        = "m-files as libraries";
+            description =
+  "A directory of m-files to place on the include path while executing the
+  student's code (as well as instructor reference tests). This directory
+  appears later on the include path than the assignment-specific configuration
+  setting. The default is to use no path.";
+        },
+        {
+            property    = matlabBinariesPath;
+            type        = shortText;
+            size        = 40;
+            default     = "/usr/local/MATLAB/R2013a/bin";
+            name        = "MATLAB bin folder";
+            category    = "MATLAB Settings";
+            description = "Absolute path of MATLAB binaries' folder";
+        },
+        {
+            property    = allIntstructorTestsMustPass;
+            type        = boolean;
+            default     = false;
+            name        = "All Instructor Tests Must Pass";
+            category    = "Scoring Settings";
+            description =
+  "If you are truly following test-driven development practices, then no code
+  is ever released until all of its unit tests pass. If this option is set to
+  true, students will not receive a non-zero score or receive further
+  assessment feedback unless all student tests pass. If this option is not
+  set, then students may continue to proceed even if some student-written
+  tests fail. The student's correctness/testing score is multiplied by the
+  proportion of their tests that pass.";
+        },
+        {
+            property    = checkingCode;
+            advanced    = true;
+            type        = radioChoice;
+            name        = "Code profiling desired method";
+            default     = "checkcode";
+            category    = "Profiling Settings";
+            description = "Choose the MATLAB routine used to get profiling
+            				informations about student's code.";
+            choices     = ( { label = "checkcode routine"; value = "checkcode"; },
+                            { label = "mlint routine"; value = "mlint"; },
+                            { label = "none"; value = "none"; }
+                          );
+        },
+        {
+            property    = debug;
+            type        = integer;
+            advanced    = true;
+            default     = 0;
+            name        = "Debug Level";
+            category    = "Script Developer";
+            description =
+  "Set to a non-zero value for the script to produce debugging output (the
+  larger the number, the greater the detail, up to about 5).  Debugging output
+  on each grading script run will be e-mailed to the instructor.";
+        },
+        {
+            property    = doNotDelete;
+            type        = antBoolean;
+            advanced    = true;
+            name        = "Preserve Derived Files";
+            category    = "Script Developer";
+            description =
+  "Set to true to prevent the plug-in from deleting the derived files it
+  creates during the build/test process for each submission.  Normally, these
+  files are deleted when a given submission has been completely processed.
+  This setting is provided for debugging purposes, when one wishes to
+  inspect the intermediate test driver source code or other derived files.";
+        }
+    );
+}
